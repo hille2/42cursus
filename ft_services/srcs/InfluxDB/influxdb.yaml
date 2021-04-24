@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-svc
+spec:
+  selector:
+    app: influxdb
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: api-port
+      port: 8086
+      targetPort: 8086
+    - protocol: TCP
+      name: interface-port
+      port: 8083
+      targetPort: 8083
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb-deployment
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - name: influxdb
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        image: influxdb_image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8086
+        - containerPort: 8083
+        volumeMounts:
+        - name: influxdb-claim
+          mountPath: /var/lib/influxdb
+      volumes:
+      - name: influxdb-claim
+        persistentVolumeClaim:
+          claimName: influxdb-pvc

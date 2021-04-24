@@ -1,0 +1,8 @@
+make
+gcc test.c libftprintf.a
+./a.out
+
+gcc -g *.c libft/libft.a
+./a.out
+
+valgrind --leak-check=full --leak-resolution=med программа аргументы

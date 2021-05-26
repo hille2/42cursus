@@ -13,6 +13,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 #install Valgrind on macOS
 brew tap LouisBrunner/valgrind
 brew install --HEAD LouisBrunner/valgrind/valgrind
+#read this: https://medium.com/fbdevclagos/updating-visual-studio-code-default-terminal-shell-from-bash-to-zsh-711c40d6f8dc
 
 #Run Valgrind
 valgrind --leak-check=full \

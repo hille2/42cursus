@@ -31,7 +31,7 @@ The goal is to create a dynamic view inside the maze, and learn Reykakastin and 
 
 ---
 ### [`MINISHELL`](https://github.com/web-sonic/Our-Own-Shell) ###
-team project with [`ctragila`](https://github.com/web-sonic)
+team project with [`ctragula`](https://github.com/web-sonic)
 The objective of this project is for you to create a simple shell.
 
 [`subject for ft_minishell`](https://github.com/hille2/42cursus_C/blob/main/minishell/en.subject.pdf)

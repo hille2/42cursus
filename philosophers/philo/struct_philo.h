@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   struct_philo.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
-/*   Updated: 2021/05/05 21:06:16 by sgath            ###   ########.fr       */
+/*   Created: 2021/05/05 20:35:59 by sgath             #+#    #+#             */
+/*   Updated: 2021/07/05 19:10:31 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef STRUCT_PHILO_H
+# define STRUCT_PHILO_H
 
-# include <string.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/uio.h>
-# include <sys/time.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "struct_philo.h"
+typedef struct s_options_philo
+{
+	size_t		number_of_philo;
+	size_t		time_to_die;
+	size_t		time_to_eat;
+	size_t		time_to_sleep;
+	size_t		number_of_must_eat;
+}				t_options_philo;
 
-int	ft_atoi(const char *str);
+typedef struct s_all_philo
+{
+	t_options_philo	philo;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
+	time_t			die;
+}				t_all_philo
 
 #endif

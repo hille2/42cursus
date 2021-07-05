@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_philo.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 20:35:59 by sgath             #+#    #+#             */
-/*   Updated: 2021/05/05 21:28:13 by sgath            ###   ########.fr       */
+/*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
+/*   Updated: 2021/07/05 19:29:02 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_PHILO_H
-# define STRUCT_PHILO_H
+#ifndef PHILO_H
+# define PHILO_H
 
-typedef struct s_options_philo
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/uio.h>
+# include <sys/time.h>
+# include <unistd.h>
+# include <pthread.h>
+# include "struct_philo.h"
+
+enum e_error_code
 {
-	int	number_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	number_of_must_eat;
-}		t_options_philo;
+	OPTIONS = 1,
+	MEMORY = 2,
+	ERROR = -1,
+};
+
+size_t	super_atoi(const char *str);
 
 #endif

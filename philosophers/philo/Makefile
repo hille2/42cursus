@@ -6,14 +6,14 @@
 #    By: sgath <sgath@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 21:07:57 by sgath             #+#    #+#              #
-#    Updated: 2021/05/05 21:22:33 by sgath            ###   ########.fr        #
+#    Updated: 2021/07/05 14:17:09 by sgath            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		philo_one
+NAME =		philo
 
 SRC =		main.c\
-			ft_atoi.c \
+			super_atoi.c \
 
 OBJ =		$(SRCS:.s=.o)
 

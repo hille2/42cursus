@@ -6,19 +6,19 @@
 #    By: sgath <sgath@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 21:07:57 by sgath             #+#    #+#              #
-#    Updated: 2021/07/05 14:17:09 by sgath            ###   ########.fr        #
+#    Updated: 2021/07/06 12:33:19 by sgath            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		philo
 
 SRC =		main.c\
+			init.c \
 			super_atoi.c \
 
 OBJ =		$(SRCS:.s=.o)
 
 INCLUDE =	philo.h \
-			struct_philo.h \
 
 FLAGS =		-g -Wall -Wextra 
 #-Werror

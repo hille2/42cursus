@@ -6,7 +6,7 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/05 19:29:02 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/07 11:29:21 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <pthread.h>
-# include "struct_philo.h"
 
 enum e_error_code
 {
@@ -29,6 +28,36 @@ enum e_error_code
 	ERROR = -1,
 };
 
-size_t	super_atoi(const char *str);
+typedef struct s_all	t_all;
+
+typedef struct s_one_philo
+{
+	size_t			num_one;
+	size_t			left_fork;
+	size_t			right_fork;
+	size_t			time_last;
+	t_all			*all;
+}					t_one_philo;
+
+typedef struct s_all
+{
+	size_t			num_of_philo;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			num_of_must_eat;
+	time_t			die;
+
+	pthread_t		*thred;
+	pthread_mutex_t	print;
+	pthread_mutex_t	*forks;
+
+	t_one_philo		*one;
+	size_t			time_start;
+}					t_all;
+
+size_t				super_atoi(const char *str);
+void				init_all(char **av, t_all *all);
+void				error_exit(int error, char *des_error);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:51:03 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/05 13:54:02 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/14 15:29:06 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,31 @@ size_t	super_atoi(const char *str)
 			return (ERROR);
 	}
 	return (number);
+}
+
+size_t	what_time_is_it(size_t start)
+{
+	struct timeval	tp_start;
+	size_t			now;
+
+	gettimeofday(&tp_start, NULL);
+	now = tp_start.tv_sec * 1000 + tp_start.tv_usec / 1000;
+	return (now - start);
+}
+
+void	clear_all(t_all *all)
+{
+	
+}
+
+void	error_exit(int error, char *des_error, t_all *all)
+{
+	if (error == OPTIONS)
+		printf("Error!\nWrong of options!\n%s\n", des_error);
+	else if (error == MEMORY)
+	{
+		printf("Error!\nMemory allocation error!\n");
+	}
+	clear_all(all);
+	exit (EXIT_FAILURE);
 }

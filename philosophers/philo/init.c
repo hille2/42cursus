@@ -6,7 +6,7 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 12:28:09 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/07 11:45:13 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/14 15:17:21 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_one_philo(t_all *all)
 	size_t	i;
 
 	i = -1;
-	all->die = 0;
 	all->one = malloc(sizeof(t_one_philo) * all->num_of_philo);
 	if (!all->one)
 		error_exit(MEMORY, NULL);
@@ -26,7 +25,7 @@ void	init_one_philo(t_all *all)
 		all->one[i].num_one = i + 1;
 		all->one[i].left_fork = i;
 		all->one[i].right_fork = (i + 1) % all->num_of_philo;
-		all->one[i].time_last = 0;
+		all->one->last_time = init_time();
 		all->one[i].all = all;
 	}
 }
@@ -36,7 +35,6 @@ void	init_mutex(t_all *all)
 	size_t	i;
 
 	i = -1;
-	all->die = 0;
 	while (++i < all->num_of_philo)
 		if (pthread_mutex_init(&(all->forks[i]), NULL))
 			error_exit(MEMORY, NULL);
@@ -45,9 +43,9 @@ void	init_mutex(t_all *all)
 	i = -1;
 	while (++i < all->num_of_philo)
 	{
-		pthread_create(all->thred + i, NULL, ???, (void *)(all->forks[i]);
+		pthread_create(all->thred + i, NULL, thread_fun, (void *)&(all->one[i]));
 		pthread_detach(*(all->thred + i));
-		//usleep(50);
+		usleep(50);
 	}
 }
 
@@ -74,9 +72,17 @@ void	init_option(char **av, t_all *all)
 			"Number of times each philo must eatshould be from 0 to 1000");
 }
 
+size_t	init_time(void)
+{
+	struct timeval	tp_start;
+
+	gettimeofday(&tp_start, NULL);
+	return (tp_start.tv_sec * 1000 + tp_start.tv_usec / 1000);
+}
+
 void	init_all(char **av, t_all *all)
 {
-	all->time_start = 0; //?
+	all->time_start = init_time();
 	init_option(av, all);
 	init_mutex(all);
 	init_one_philo(all);

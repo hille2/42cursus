@@ -6,7 +6,7 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/14 15:23:57 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/14 17:18:14 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_all
 
 size_t				super_atoi(const char *str);
 void				init_all(char **av, t_all *all);
-void				error_exit(int error, char *des_error);
+void				error_exit(int error, char *des_error, t_all *all);
 void				*thread_fun(void *one);
 size_t				init_time(void);
 size_t				what_time_is_it(size_t start);
+void				clear_all(t_all *all);
 #endif

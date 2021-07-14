@@ -6,7 +6,7 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 12:52:31 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/14 15:24:56 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/14 17:50:25 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	eating(t_one_philo *one)
 {
 	pthread_mutex_lock(&one->all->print);
-	printf("%su %su is eating\n", what_time_is_it(one->all->time_start),
+	printf("%zu %zu is eating\n", what_time_is_it(one->all->time_start),
 		one->num_one);
 	pthread_mutex_unlock(&one->all->print);
 	pthread_mutex_lock(&one->all->forks[one->left_fork]);
@@ -28,7 +28,7 @@ void	eating(t_one_philo *one)
 void	sleeping(t_one_philo *one)
 {
 	pthread_mutex_lock(&one->all->print);
-	printf("%su %su is sleeping\n", what_time_is_it(one->all->time_start),
+	printf("%zu %zu is sleeping\n", what_time_is_it(one->all->time_start),
 		one->num_one);
 	pthread_mutex_unlock(&one->all->print);
 	usleep(one->all->time_to_sleep * 1000);
@@ -37,7 +37,7 @@ void	sleeping(t_one_philo *one)
 void	thinking(t_one_philo *one)
 {
 	pthread_mutex_lock(&one->all->print);
-	printf("%su %su is thinking\n", what_time_is_it(one->all->time_start),
+	printf("%zu %zu is thinking\n", what_time_is_it(one->all->time_start),
 		one->num_one);
 	pthread_mutex_unlock(&one->all->print);
 	

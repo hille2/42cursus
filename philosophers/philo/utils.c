@@ -6,7 +6,7 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:51:03 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/14 15:29:06 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/14 17:33:08 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,19 @@ size_t	what_time_is_it(size_t start)
 
 void	clear_all(t_all *all)
 {
-	
+	size_t	i;
+
+	i = -1;
+	if (!all)
+		return ;
+	if (all->forks)
+	{
+		while (++i < all->num_of_philo)
+			pthread_mutex_destroy(&all->forks[i]);
+		free(all->forks);
+		free(all->one);
+	}
+	pthread_mutex_destroy(&all->print);
 }
 
 void	error_exit(int error, char *des_error, t_all *all)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yu <yu@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:51:03 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/14 17:33:08 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/17 14:56:27 by yu               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ size_t	super_atoi(const char *str)
 	while ((*str >= 8 && *str <= 13) || *str == 32)
 		str++;
 	if (*str == '-')
-		return (ERROR);
-	if (*str == '+' || *str == '-')
+		return (MAX_SIZE);
+	if (*str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{

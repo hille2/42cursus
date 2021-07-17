@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgath <sgath@student.42.fr>                +#+  +:+       +#+         #
+#    By: yu <yu@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 21:07:57 by sgath             #+#    #+#              #
-#    Updated: 2021/07/14 15:21:10 by sgath            ###   ########.fr        #
+#    Updated: 2021/07/17 14:49:47 by yu               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,14 @@ SRC =		main.c\
 			utils.c \
 			threads.c \
 
-OBJ =		$(SRCS:.s=.o)
-
 INCLUDE =	philo.h \
 
-FLAGS =		-g -Wall -Wextra 
+FLAGS =		-g -Wall -Wextra -pthread -o term 
 #-Werror
 
 .PHONY: 	all clean fclean re bonus
 
-$(NAME):	$(OBJ)
+$(NAME):	
 			gcc $(SRC) $(FLAGS) $? -o $@
 			
 all: 		$(NAME)

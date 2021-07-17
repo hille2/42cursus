@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yu <yu@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/14 17:18:14 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/17 15:02:19 by yu               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@
 # include <unistd.h>
 # include <pthread.h>
 
+#define MAX_SIZE 140737488345912
+
 enum e_error_code
 {
 	OPTIONS = 1,
 	MEMORY = 2,
-	ERROR = -1,
+	ERROR = 0,
+	LIMIT_TIME = 1000,
+	MAX_PHILO = 250,
 };
 
 typedef struct s_all	t_all;
@@ -37,6 +41,7 @@ typedef struct s_one_philo
 	size_t			right_fork;
 
 	time_t			last_time;
+	size_t			count_eating;
 	t_all			*all;
 }					t_one_philo;
 
@@ -59,7 +64,7 @@ typedef struct s_all
 size_t				super_atoi(const char *str);
 void				init_all(char **av, t_all *all);
 void				error_exit(int error, char *des_error, t_all *all);
-void				*thread_fun(void *one);
+void				*thread_one(void *one);
 size_t				init_time(void);
 size_t				what_time_is_it(size_t start);
 void				clear_all(t_all *all);

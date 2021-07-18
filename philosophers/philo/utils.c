@@ -6,22 +6,20 @@
 /*   By: yu <yu@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:51:03 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/17 14:56:27 by yu               ###   ########.fr       */
+/*   Updated: 2021/07/18 20:36:59 by yu               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	super_atoi(const char *str)
+long	super_atoi(const char *str)
 {
-	size_t	number;
-	size_t	checknum;
+	long	number;
+	long	checknum;
 
 	number = 0;
-	while ((*str >= 8 && *str <= 13) || *str == 32)
-		str++;
 	if (*str == '-')
-		return (MAX_SIZE);
+		error_exit(OPTIONS, "Сheck the spelling of the arguments!\n", NULL);
 	if (*str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
@@ -30,15 +28,17 @@ size_t	super_atoi(const char *str)
 		number = number * 10 + (*str - '0');
 		str++;
 		if (checknum > number)
-			return (ERROR);
+			error_exit(OPTIONS, "Сheck the spelling of the arguments!\n", NULL);
 	}
+	if (*str || number == 0)
+		error_exit(OPTIONS, "Сheck the spelling of the arguments!\n", NULL);
 	return (number);
 }
 
-size_t	what_time_is_it(size_t start)
+long	what_time(long start)
 {
 	struct timeval	tp_start;
-	size_t			now;
+	long			now;
 
 	gettimeofday(&tp_start, NULL);
 	now = tp_start.tv_sec * 1000 + tp_start.tv_usec / 1000;
@@ -47,14 +47,14 @@ size_t	what_time_is_it(size_t start)
 
 void	clear_all(t_all *all)
 {
-	size_t	i;
+	long	i;
 
 	i = -1;
 	if (!all)
 		return ;
 	if (all->forks)
 	{
-		while (++i < all->num_of_philo)
+		while (++i < all->opt.p_count)
 			pthread_mutex_destroy(&all->forks[i]);
 		free(all->forks);
 		free(all->one);
@@ -65,11 +65,30 @@ void	clear_all(t_all *all)
 void	error_exit(int error, char *des_error, t_all *all)
 {
 	if (error == OPTIONS)
-		printf("Error!\nWrong of options!\n%s\n", des_error);
+	{
+		print_error("Error!\nWrong of options!\n");
+		print_error(des_error);
+	}
+
 	else if (error == MEMORY)
 	{
-		printf("Error!\nMemory allocation error!\n");
+		print_error("Error!\nMemory allocation error!\n");
 	}
-	clear_all(all);
+	if (all)
+		clear_all(all);
 	exit (EXIT_FAILURE);
+}
+
+void	my_usleep(long timer, long t_start)
+{
+	long	stop;
+	long	start;
+
+	stop = what_time(t_start) + timer;
+	start = what_time(t_start);
+	while (start < stop)
+	{
+		usleep(50);
+		start = what_time(t_start);
+	}
 }

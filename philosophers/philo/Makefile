@@ -3,36 +3,37 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yu <yu@student.42.fr>                      +#+  +:+       +#+         #
+#    By: sgath <sgath@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 21:07:57 by sgath             #+#    #+#              #
-#    Updated: 2021/07/17 14:49:47 by yu               ###   ########.fr        #
+#    Updated: 2021/07/18 12:23:01 by sgath            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		philo
+NAME =			philo
 
-SRC =		main.c\
-			init.c \
-			utils.c \
-			threads.c \
+SRC =			main.c\
+				init.c \
+				utils.c \
+				threads.c \
 
-INCLUDE =	philo.h \
+INCLUDE =		philo.h \
 
-FLAGS =		-g -Wall -Wextra -pthread -o term 
-#-Werror
+FLAGS =			-Wall -Wextra -Werror
 
-.PHONY: 	all clean fclean re bonus
+FLAGS_LINUX =	-pthread -o term 
 
-$(NAME):	
-			gcc $(SRC) $(FLAGS) $? -o $@
+.PHONY: 		all clean fclean re bonus
+
+$(NAME):		
+				gcc $(SRC) $(FLAGS) $(FLAGS_LINUX) $? -o $@
 			
-all: 		$(NAME)
+all: 			$(NAME)
 
 clean:
-			rm -rf $(OBJ)
+				rm -rf $(OBJ)
 
-fclean:		clean
-			rm -rf $(NAME)
+fclean:			clean
+				rm -rf $(NAME)
 
-re:			fclean all
+re:				fclean all

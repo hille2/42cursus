@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yu <yu@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:51:03 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/17 14:56:27 by yu               ###   ########.fr       */
+/*   Updated: 2021/07/18 12:21:19 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	super_atoi(const char *str)
 	return (number);
 }
 
-size_t	what_time_is_it(size_t start)
+size_t	what_time(size_t start)
 {
 	struct timeval	tp_start;
 	size_t			now;
@@ -54,7 +54,7 @@ void	clear_all(t_all *all)
 		return ;
 	if (all->forks)
 	{
-		while (++i < all->num_of_philo)
+		while (++i < all->p_count)
 			pthread_mutex_destroy(&all->forks[i]);
 		free(all->forks);
 		free(all->one);
@@ -70,6 +70,21 @@ void	error_exit(int error, char *des_error, t_all *all)
 	{
 		printf("Error!\nMemory allocation error!\n");
 	}
-	clear_all(all);
+	if (all)
+		clear_all(all);
 	exit (EXIT_FAILURE);
+}
+
+void	my_usleep(size_t t_start, size_t timer)
+{
+	time_t	stop;
+	time_t	start;
+
+	stop = what_time(t_start) + timer;
+	start = what_time(t_start);
+	while (start < stop)
+	{
+		usleep(50);
+		start = what_time(t_start);
+	}
 }

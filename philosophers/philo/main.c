@@ -6,44 +6,42 @@
 /*   By: sgath <sgath@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:51:32 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/18 15:28:11 by sgath            ###   ########.fr       */
+/*   Updated: 2021/07/18 18:10:24 by sgath            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	is_it_time_die(t_one_philo *one, size_t *glutton)
+int	is_it_time_die(t_one_philo *one, long *glutton)
 {
-	if (one->count_eating >= one->all->count_eat)
+	if (one->count_eating >= one->opt->count_eat)
 		(*glutton)++;
+	pthread_mutex_lock(&one->eat);
 	if (what_time(one->all->t_start) > one->time_die)
 	{
 		pthread_mutex_lock(one->print);
 		printf("%zu\t %zu is dies\n", what_time(one->all->t_start), one->num);
 		return (ITS_TRUE);
 	}
+	pthread_mutex_unlock(&one->eat);
 	return (ITS_FALSE);
 }
 
-void	watcher(void *basic)
+void	watcher(t_all *all, t_option opt)
 {
-	t_all	*all;
-	size_t	i;
-	size_t	glutton;
+	long	i;
+	long	glutton;
 
-	all = (t_all *)basic;
 	while (42)
 	{
 		i = -1;
 		glutton = 0;
-		while (++i < all->p_count)
+		while (++i < opt.p_count)
 		{
-			pthread_mutex_lock(&all->one[i].eat);
 			if (is_it_time_die(&all->one[i], &glutton) == ITS_TRUE)
 				return ;
-			pthread_mutex_unlock(&all->one[i].eat);
 		}
-		if (glutton == all->p_count - 1 && all->p_count != 1)
+		if (glutton == opt.p_count - 1 && opt.p_count != 1)
 		{
 			pthread_mutex_lock(&all->print);
 			return ;
@@ -58,8 +56,8 @@ int	main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 		error_exit(OPTIONS, "Number of arguments must be 4 or 5", NULL);
 	init_all(av, &all);
-	life_cycle(&all);
-	watcher(&all);
+	life_cycle_of_philo(&all);
+	watcher(&all, all.opt);
 	clear_all(&all);
 	usleep(1000);
 	return (EXIT_SUCCESS);

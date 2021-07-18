@@ -6,11 +6,11 @@
 #    By: sgath <sgath@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 21:07:57 by sgath             #+#    #+#              #
-#    Updated: 2021/07/18 14:01:55 by sgath            ###   ########.fr        #
+#    Updated: 2021/07/18 17:58:00 by sgath            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			philo
+NAME =			philo_one
 
 SRC =			main.c\
 				init.c \

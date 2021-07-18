@@ -6,7 +6,7 @@
 /*   By: yu <yu@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:18 by sgath             #+#    #+#             */
-/*   Updated: 2021/07/18 20:32:44 by yu               ###   ########.fr       */
+/*   Updated: 2021/07/18 22:16:21 by yu               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@
 # include <unistd.h>
 # include <pthread.h>
 
-# define MAX_SIZE	140737488345912
-
 enum e_error_code
 {
 	OPTIONS = 1,
 	MEMORY = 2,
-	ERROR = 0,
 	LIMIT_TIME = 1000,
 	MAX_PHILO = 250,
 	ITS_TRUE = 0,
